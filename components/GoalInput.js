@@ -19,7 +19,7 @@ function GoalInput(props) {
         onChangeText={goalInputHandler}
         value={enteredGoalText}
       />
-      <Button title="Add Goal" onPress={addGoalHandler} />
+      <Button title="Add Goal" onPress={addGoalHandler} color="#581574" />
     </View>
   );
 }
