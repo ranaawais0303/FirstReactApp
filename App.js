@@ -11,12 +11,17 @@ export default function App() {
   function startAddGoalHandler() {
     setModalIsVisible(true);
   }
+
+  function endAddGoalHandler() {
+    setModalIsVisible(false);
+  }
   function addGoalHandler(enteredGoalText) {
     setCourseGoal((currentCourseGoals) => [
       ...currentCourseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
     // setEnteredGoalText("");
+    endAddGoalHandler();
   }
   function deleteGoalHandler(id) {
     setCourseGoal((currentCourseGoals) => {
@@ -26,12 +31,12 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <Button
-        title="Add New Goal"
-        color="#5e0acc"
-        onPress={startAddGoalHandler}
+      <Button title="Add New Goal" onPress={startAddGoalHandler} />
+      <GoalInput
+        visible={modalIsVisible}
+        onAddGoal={addGoalHandler}
+        onCancel={endAddGoalHandler}
       />
-      <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} />
       <View style={styles.goalsContainer}>
         <FlatList
           data={courseGoal}
@@ -63,6 +68,7 @@ const styles = StyleSheet.create({
   goalsContainer: {
     backgroundColor: "lightblue",
     borderRadius: 10,
+    marginTop: 10,
     flex: 5,
   },
 });
